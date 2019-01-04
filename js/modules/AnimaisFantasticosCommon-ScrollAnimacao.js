@@ -1,25 +1,40 @@
-const Methods = {
-    init() {
-        Methods.animationOnScroll();
-    },
-    animationOnScroll() {
-        const sectionsToScrollOnViewport = document.querySelectorAll('.js--scroll');
-        if (sectionsToScrollOnViewport.length) {
-            const posToStartAnimation = window.innerHeight * 0.8;
+export default class ScrollAnima {
+    constructor(sections) {
+        this.sections = document.querySelectorAll(sections);
+        this.posToStartAnimation = window.innerHeight * 0.8;
 
-            const scrollOnViewport = () => {
-                sectionsToScrollOnViewport.forEach((section) => {
-                    const sectionTop = section.getBoundingClientRect().top - posToStartAnimation;
-                    return sectionTop < 0 ? section.classList.add('ativo') : 0;
-                });
+        this.checkDistance = this.checkDistance.bind(this);
+    }
+
+    getDistance() {
+        /* eslint-disable */
+        this.distance = [...this.sections].map((section) => {
+            /* eslint-enable */
+            return {
+                element: section,
+                offset: Math.floor(section.offsetTop) - this.posToStartAnimation,
             };
+        });
+    }
 
-            scrollOnViewport();
-            window.addEventListener('scroll', scrollOnViewport);
+    checkDistance() {
+        /* eslint-disable */
+        this.distance.map((item) => {
+            /* eslint-enable */
+            if (window.pageYOffset > item.offset) {
+                item.element.classList.add('ativo');
+            } else if (item.element.classList.contains('ativo')) {
+                item.element.classList.remove('ativo');
+            }
+        });
+    }
+
+    init() {
+        if (this.sections.length) {
+            this.getDistance();
+            this.checkDistance();
+            window.addEventListener('scroll', this.checkDistance);
         }
-    },
-};
-
-export default {
-    init: Methods.init,
-};
+        return this;
+    }
+}
