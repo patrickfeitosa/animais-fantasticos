@@ -1,9 +1,11 @@
+import CommonHelpers from './AnimaisFantasticosCommon-Helpers.js';
+
 export default class ScrollAnima {
     constructor(sections) {
         this.sections = document.querySelectorAll(sections);
         this.posToStartAnimation = window.innerHeight * 0.8;
 
-        this.checkDistance = this.checkDistance.bind(this);
+        this.checkDistance = CommonHelpers.debounce(this.checkDistance.bind(this), 50);
     }
 
     getDistance() {
