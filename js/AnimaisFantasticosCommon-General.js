@@ -24,7 +24,9 @@ const Methods = {
         const commonModal = new CommonModal('[data-modal="abrir"]', '[data-modal="fechar"]', '[data-modal="container"]');
         commonModal.init();
 
-        CommonTooltip.init();
+        const commonTooltip = new CommonTooltip('[data-tooltip]');
+        commonTooltip.init();
+
         CommonDropdownMenu.init();
         CommonWorkingHours.init();
         CommonFetchNumbers.init();
