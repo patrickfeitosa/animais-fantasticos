@@ -9,7 +9,6 @@ import CommonFetchNumbers from './modules/AnimaisFantasticosCommon-FetchNumbers.
 import CommonFetchBitcoinValues from './modules/AnimaisFantasticosCommon-FetchBitcoinValues.js';
 import MobileMenu from './modules/AnimaisFantasticosMobile-Menu.js';
 import CommonScrollAnimacao from './modules/AnimaisFantasticosCommon-ScrollAnimacao.js';
-import MenuMobile from './modules/AnimaisFantasticosMobile-Menu.js';
 
 const Methods = {
     init() {
