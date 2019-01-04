@@ -30,7 +30,9 @@ const Methods = {
         const commonScrollAnimacao = new CommonScrollAnimacao('.js--scroll');
         commonScrollAnimacao.init();
 
-        CommonDropdownMenu.init();
+        const commonDropdownMenu = new CommonDropdownMenu('[data-dropdown]', 'active', ['click', 'touchstart']);
+        commonDropdownMenu.init();
+
         CommonWorkingHours.init();
         CommonFetchNumbers.init();
         CommonFetchBitcoinValues.init();
