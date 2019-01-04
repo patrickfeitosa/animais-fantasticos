@@ -35,4 +35,15 @@ export default {
             throw new Error('The className must be a String or an Array');
         }
     },
+
+    debounce(callback, delay) {
+        let timer;
+        return (...args) => {
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                callback(...args);
+                timer = null;
+            }, delay);
+        };
+    },
 };
