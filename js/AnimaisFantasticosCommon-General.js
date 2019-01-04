@@ -33,7 +33,9 @@ const Methods = {
         const commonDropdownMenu = new CommonDropdownMenu('[data-dropdown]', 'active', ['click', 'touchstart']);
         commonDropdownMenu.init();
 
-        CommonWorkingHours.init();
+        const commonWorkingHours = new CommonWorkingHours('[data-semana]');
+        commonWorkingHours.init();
+
         CommonFetchNumbers.init();
         CommonFetchBitcoinValues.init();
 
