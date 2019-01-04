@@ -3,20 +3,37 @@ export default class ScrollAnima {
         this.sections = document.querySelectorAll(sections);
         this.posToStartAnimation = window.innerHeight * 0.8;
 
-        this.animationOnScroll = this.animationOnScroll.bind(this);
+        this.checkDistance = this.checkDistance.bind(this);
     }
 
-    animationOnScroll() {
-        [].map.call(this.sections, (section) => {
-            const sectionTop = section.getBoundingClientRect().top - this.posToStartAnimation;
-            return sectionTop < 0 ? section.classList.add('ativo') : 0;
+    getDistance() {
+        /* eslint-disable */
+        this.distance = [...this.sections].map((section) => {
+            /* eslint-enable */
+            return {
+                element: section,
+                offset: Math.floor(section.offsetTop) - this.posToStartAnimation,
+            };
+        });
+    }
+
+    checkDistance() {
+        /* eslint-disable */
+        this.distance.map((item) => {
+            /* eslint-enable */
+            if (window.pageYOffset > item.offset) {
+                item.element.classList.add('ativo');
+            } else if (item.element.classList.contains('ativo')) {
+                item.element.classList.remove('ativo');
+            }
         });
     }
 
     init() {
         if (this.sections.length) {
-            this.animationOnScroll();
-            window.addEventListener('scroll', this.animationOnScroll);
+            this.getDistance();
+            this.checkDistance();
+            window.addEventListener('scroll', this.checkDistance);
         }
         return this;
     }
