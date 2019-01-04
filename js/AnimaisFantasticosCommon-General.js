@@ -12,7 +12,8 @@ import MobileMenu from './modules/AnimaisFantasticosMobile-Menu.js';
 
 const Methods = {
     init() {
-        CommonScrollSuave.init();
+        const commonScrollSuave = new CommonScrollSuave('.js--menu a[href^="#"]');
+        commonScrollSuave.init();
         CommonScrollAnimacao.init();
         CommonAccordion.init();
         CommonTabImages.init();
