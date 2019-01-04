@@ -1,4 +1,4 @@
-export default class CommonTabImages {
+export default class TabImages {
     constructor(tabMenu, tabContent) {
         this.tabMenu = document.querySelectorAll(tabMenu);
         this.tabContent = document.querySelectorAll(tabContent);

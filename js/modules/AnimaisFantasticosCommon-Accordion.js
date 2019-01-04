@@ -17,7 +17,7 @@ export default class Accordion {
 
     /**
      * @access private
-     * Init function
+     * Init the Class
      */
     init() {
         if (this.accordionList.length) {
