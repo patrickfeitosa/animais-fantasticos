@@ -14,7 +14,10 @@ const Methods = {
     init() {
         const commonScrollSuave = new CommonScrollSuave('.js--menu a[href^="#"]');
         commonScrollSuave.init();
-        CommonAccordion.init();
+
+        const commonAccordion = new CommonAccordion('.js--accordion dt');
+        commonAccordion.init();
+
         CommonTabImages.init();
         CommonModal.init();
         CommonTooltip.init();
