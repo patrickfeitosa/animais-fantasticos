@@ -18,7 +18,9 @@ const Methods = {
         const commonAccordion = new CommonAccordion('.js--accordion dt');
         commonAccordion.init();
 
-        CommonTabImages.init();
+        const commomTabImages = new CommonTabImages('.js--tabmenu li', '.js--tabcontent section');
+        commomTabImages.init();
+
         CommonModal.init();
         CommonTooltip.init();
         CommonDropdownMenu.init();

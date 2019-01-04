@@ -1,31 +1,43 @@
-const Methods = {
-    init() {
-        Methods.initTabNav();
-    },
-    initTabNav() {
-        const tabMenu = document.querySelectorAll('.js--tabmenu li');
-        const tabContent = document.querySelectorAll('.js--tabcontent section');
+export default class CommonTabImages {
+    constructor(tabMenu, tabContent) {
+        this.tabMenu = document.querySelectorAll(tabMenu);
+        this.tabContent = document.querySelectorAll(tabContent);
+        this.activeClass = 'ativo';
+    }
 
-        if (tabMenu.length && tabContent.length) {
-            tabContent[0].classList.add('ativo');
+    /**
+     * @access private
+     * @param {Number} index in the NodeList that will be active
+     */
+    activeTab(index) {
+        this.tabContent.forEach((section) => {
+            section.classList.remove(this.activeClass, section.dataset.animationOrientation);
+        });
+        const animationDirection = this.tabContent[index].dataset.animationOrientation;
+        this.tabContent[index].classList.add(this.activeClass, animationDirection);
+    }
 
-            const activeTab = (index) => {
-                tabContent.forEach((section) => {
-                    section.classList.remove('ativo', section.dataset.animationOrientation);
-                });
-                const animationDirection = tabContent[index].dataset.animationOrientation;
-                tabContent[index].classList.add('ativo', animationDirection);
-            };
-
-            tabMenu.forEach((itemMenu, index) => {
-                itemMenu.addEventListener('click', () => {
-                    activeTab(index);
-                });
+    /**
+     * @access private
+     * Default listener for active the functions
+     */
+    addTabNavEvent() {
+        [].map.call(this.tabMenu, (itemMenu, index) => {
+            itemMenu.addEventListener('click', () => {
+                this.activeTab(index);
             });
-        }
-    },
-};
+        });
+    }
 
-export default {
-    init: Methods.init,
-};
+    /**
+     * @access private
+     * Init the Class
+     */
+    init() {
+        if (this.tabMenu.length && this.tabContent.length) {
+            this.activeTab(0);
+            this.addTabNavEvent();
+        }
+        return this;
+    }
+}
