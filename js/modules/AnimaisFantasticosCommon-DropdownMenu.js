@@ -1,26 +1,34 @@
 import CommonHelpers from './AnimaisFantasticosCommon-Helpers.js';
 
-const Methods = {
-    dropdownMenus: document.querySelectorAll('[data-dropdown]'),
-    init() {
-        Methods.putEvents();
-    },
+export default class DropdownMenu {
+    constructor(dropdownMenus, activeClass, customUserEvents) {
+        this.dropdownMenus = document.querySelectorAll(dropdownMenus);
+        this.activeClass = activeClass;
+        this.customUserEvents = customUserEvents || ['click', 'touchstart'];
 
-    putEvents() {
-        Methods.dropdownMenus.forEach((subMenu) => {
-            ['click', 'touchstart'].forEach((userEvent) => {
-                subMenu.addEventListener(userEvent, Methods.handleClickTouch);
+        this.handleClickTouch = this.handleClickTouch.bind(this);
+    }
+
+    addDropdownMenuEvents() {
+        /* eslint-disable */
+        [...this.dropdownMenus].map((subMenu) => {
+            this.customUserEvents.map((userEvent) => {
+                subMenu.addEventListener(userEvent, this.handleClickTouch);
             });
         });
-    },
+        /* eslint-enable */
+    }
 
     handleClickTouch(ev) {
         ev.preventDefault();
-        this.classList.add('active');
-        CommonHelpers.clickOutside(ev.currentTarget, ['click', 'touchstart'], () => this.classList.remove('active'));
-    },
-};
+        const el = ev.currentTarget;
+        el.classList.add(this.activeClass);
+        CommonHelpers.clickOutside(el, this.customUserEvents, () => {
+            el.classList.remove(this.activeClass);
+        });
+    }
 
-export default {
-    init: Methods.init,
-};
+    init() {
+        this.addDropdownMenuEvents();
+    }
+}
