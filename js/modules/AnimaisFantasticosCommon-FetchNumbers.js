@@ -13,7 +13,9 @@ const Methods = {
                 const animalElement = Methods.createAnimal(animal);
                 return numerosGrid.appendChild(animalElement);
             });
-            CommonNumberAnimation.init();
+
+            const commonNumberAnimation = new CommonNumberAnimation('[data-numero]', '.numeros', 'ativo');
+            commonNumberAnimation.init();
         } catch (erro) {
             throw new Error(erro);
         }
