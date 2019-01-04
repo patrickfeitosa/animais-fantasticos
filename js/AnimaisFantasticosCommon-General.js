@@ -21,7 +21,9 @@ const Methods = {
         const commomTabImages = new CommonTabImages('.js--tabmenu li', '.js--tabcontent section');
         commomTabImages.init();
 
-        CommonModal.init();
+        const commonModal = new CommonModal('[data-modal="abrir"]', '[data-modal="fechar"]', '[data-modal="container"]');
+        commonModal.init();
+
         CommonTooltip.init();
         CommonDropdownMenu.init();
         CommonWorkingHours.init();
