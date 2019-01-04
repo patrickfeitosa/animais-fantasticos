@@ -1,25 +1,23 @@
-const Methods = {
-    init() {
-        Methods.animationOnScroll();
-    },
+export default class ScrollAnima {
+    constructor(sections) {
+        this.sections = document.querySelectorAll(sections);
+        this.posToStartAnimation = window.innerHeight * 0.8;
+
+        this.animationOnScroll = this.animationOnScroll.bind(this);
+    }
+
     animationOnScroll() {
-        const sectionsToScrollOnViewport = document.querySelectorAll('.js--scroll');
-        if (sectionsToScrollOnViewport.length) {
-            const posToStartAnimation = window.innerHeight * 0.8;
+        [].map.call(this.sections, (section) => {
+            const sectionTop = section.getBoundingClientRect().top - this.posToStartAnimation;
+            return sectionTop < 0 ? section.classList.add('ativo') : 0;
+        });
+    }
 
-            const scrollOnViewport = () => {
-                sectionsToScrollOnViewport.forEach((section) => {
-                    const sectionTop = section.getBoundingClientRect().top - posToStartAnimation;
-                    return sectionTop < 0 ? section.classList.add('ativo') : 0;
-                });
-            };
-
-            scrollOnViewport();
-            window.addEventListener('scroll', scrollOnViewport);
+    init() {
+        if (this.sections.length) {
+            this.animationOnScroll();
+            window.addEventListener('scroll', this.animationOnScroll);
         }
-    },
-};
-
-export default {
-    init: Methods.init,
-};
+        return this;
+    }
+}

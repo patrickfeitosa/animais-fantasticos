@@ -27,11 +27,13 @@ const Methods = {
         const commonTooltip = new CommonTooltip('[data-tooltip]');
         commonTooltip.init();
 
+        const commonScrollAnimacao = new CommonScrollAnimacao('.js--scroll');
+        commonScrollAnimacao.init();
+
         CommonDropdownMenu.init();
         CommonWorkingHours.init();
         CommonFetchNumbers.init();
         CommonFetchBitcoinValues.init();
-        CommonScrollAnimacao.init();
         MobileMenu.init();
     },
 };
