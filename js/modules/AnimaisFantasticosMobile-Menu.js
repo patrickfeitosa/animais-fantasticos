@@ -1,29 +1,37 @@
 import CommonHelpers from './AnimaisFantasticosCommon-Helpers.js';
 
-const Methods = {
-    menuMobile: document.querySelector('[data-menu="button"]'),
-    listaMenu: document.querySelector('[data-menu="lista"]'),
-    eventos: ['click', 'touchstart'],
-    init() {
-        Methods.openMenu();
-    },
+export default class MenuMobile {
+    constructor(menuMobile, listaMenu, activeClass, customUserEvents) {
+        this.menuMobile = document.querySelector(menuMobile);
+        this.listaMenu = document.querySelector(listaMenu);
+        this.activeClass = activeClass || 'active';
+
+        this.customUserEvents = customUserEvents || ['click', 'touchstart'];
+        this.handleClickEvent = this.handleClickEvent.bind(this);
+    }
 
     handleClickEvent() {
-        Methods.menuMobile.classList.add('active');
-        Methods.listaMenu.classList.add('active');
-        CommonHelpers.clickOutside(Methods.listaMenu, Methods.eventos, () => {
-            Methods.menuMobile.classList.remove('active');
-            Methods.listaMenu.classList.remove('active');
+        this.menuMobile.classList.add(this.activeClass);
+        this.listaMenu.classList.add(this.activeClass);
+        CommonHelpers.clickOutside(this.listaMenu, this.customUserEvents, () => {
+            this.menuMobile.classList.remove(this.activeClass);
+            this.listaMenu.classList.remove(this.activeClass);
         });
-    },
+    }
 
     openMenu() {
-        Methods.eventos.forEach(() => {
-            Methods.menuMobile.addEventListener('click', Methods.handleClickEvent);
+        /* eslint-disable */
+        [...this.customUserEvents].map(() => {
+            this.menuMobile.addEventListener('click', this.handleClickEvent);
         });
-    },
-};
+        /* eslint-enable */
+    }
 
-export default {
-    init: Methods.init,
-};
+
+    init() {
+        if (this.listaMenu && this.menuMobile) {
+            this.openMenu();
+        }
+        return this;
+    }
+}
