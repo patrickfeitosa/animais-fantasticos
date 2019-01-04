@@ -1,26 +1,28 @@
-const Methods = {
+export default class Accordion {
+    constructor(list) {
+        this.accordionList = document.querySelectorAll(list);
+        this.activeClass = 'ativo';
+
+        // this.activeAccordion = this.activeAccordion.bind(this);
+    }
+
+    activeAccordion(item) {
+        item.classList.toggle(this.activeClass);
+        item.nextElementSibling.classList.toggle(this.activeClass);
+    }
+
+    addAccordionEvent() {
+        [].map.call(this.accordionList, item => item.addEventListener('click', () => this.activeAccordion(item)));
+    }
+
+    /**
+     * @access private
+     * Init function
+     */
     init() {
-        Methods.accordionView();
-    },
-    accordionView() {
-        const accordionList = document.querySelectorAll('.js--accordion dt');
-        const activeClass = 'ativo';
-
-        function activeAccordion() {
-            this.classList.toggle(activeClass);
-            this.nextElementSibling.classList.toggle(activeClass);
+        if (this.accordionList.length) {
+            this.activeAccordion(this.accordionList[0]);
+            this.addAccordionEvent();
         }
-
-        if (accordionList.length) {
-            accordionList[0].classList.add(activeClass);
-            accordionList[0].nextElementSibling.classList.add(activeClass);
-            accordionList.forEach((item) => {
-                item.addEventListener('click', activeAccordion);
-            });
-        }
-    },
-};
-
-export default {
-    init: Methods.init,
-};
+    }
+}
