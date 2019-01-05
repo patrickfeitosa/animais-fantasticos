@@ -23,7 +23,9 @@
     border: 10px solid #fb5;
     box-shadow: 0 0 0 10px #ffffff;
     position: relative;
-    min-width: 300px;
+    width: 80vw;
+    max-width: 600px;
+    box-sizing: border-box;
 }
 
 @keyframes animacaoModal {
@@ -68,6 +70,8 @@
     width: 100%;
     padding: .7rem .5rem;
     box-sizing: border-box;
+    border: solid 2px #222;
+    border-radius: 0px;
 }
 
 .modal button[type="submit"] {
