@@ -10,6 +10,8 @@ import CommonFetchBitcoinValues from './modules/AnimaisFantasticosCommon-FetchBi
 import MobileMenu from './modules/AnimaisFantasticosMobile-Menu.js';
 import CommonScrollAnimacao from './modules/AnimaisFantasticosCommon-ScrollAnimacao.js';
 
+import SliderNav from './vendor/Slider.js';
+
 const Methods = {
     init() {
         const commonScrollSuave = new CommonScrollSuave('.js--menu a[href^="#"]');
@@ -41,6 +43,23 @@ const Methods = {
 
         const mobileMenu = new MobileMenu('[data-menu="button"]', '[data-menu="lista"]');
         mobileMenu.init();
+
+        Methods.initSlider();
+    },
+
+    initSlider() {
+        const options = {
+            slide: '.js--slider',
+            wrapper: '.js--main-wrapper',
+            hasThumbs: {
+                options: true,
+                selector: '.js--thumbs',
+            },
+            infinite: true,
+        };
+
+        const sliderWithNav = new SliderNav(options);
+        sliderWithNav.init();
     },
 };
 
